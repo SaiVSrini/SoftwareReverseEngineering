@@ -96,6 +96,6 @@ Extensible & Scriptable — Modular structure for easy upgrades
  ## Visualizations
  ### Flag Frequency Chart
 
-  	![Flag Frequency](screenshots/flags.png)
+  	![image](screenshots/flags.png)
  	
 
