@@ -1,5 +1,5 @@
 # SoftwareReverseEngineering
-📖 What is RegDropMap?
+##📖 What is RegDropMap?
 
 RegDropMap is a lightweight forensic tool that parses RegShot diff files, identifies registry-based persistence mechanisms, and visualizes dropped file paths linked to registry keys.
 
@@ -15,7 +15,7 @@ and to accomplish the following tasks:
 	✅ Identify dropped files in unusual or hidden locations (like %Temp%, %AppData%, etc.)
 	✅ Automate tedious manual analysis of large diff.txt registry files
 
-⚡ Features
+##⚡ Features
 
 Real-world log compatibility — Robust parsing of messy RegShot outputs
 
@@ -33,7 +33,7 @@ Visualizations — Generate clear and insightful:
 
 Extensible & Scriptable — Modular structure for easy upgrades
 
-🛠️ Installation
+##🛠️ Installation
 
 	Clone the repository:
 		git clone https://github.com/SaiVSrini/SoftwareReverseEngineering.git
@@ -42,7 +42,7 @@ Extensible & Scriptable — Modular structure for easy upgrades
 		pip install -r requirements.txt
 
 
-📂 Project Structure
+##📂 Project Structure
 
 	RegDropMap/
 	├── regdropmap.py       # Main script
@@ -54,7 +54,7 @@ Extensible & Scriptable — Modular structure for easy upgrades
 	├── output/             # Saved visualizations
 	└── README.md           # Project documentation
 
- 🚀 Usage
+ ##🚀 Usage
 
  	Run the tool:
   	python regdropmap.py -i path/to/diff.txt -o output_folder --verbose
@@ -64,7 +64,7 @@ Extensible & Scriptable — Modular structure for easy upgrades
 	-o / --output | Output folder for generated graphs (optional, defaults to output/)
 	--verbose | Enable detailed console output (optional)
  
-🧩 Module Descriptions
+##🧩 Module Descriptions
 
  	Module | Purpose
 	parser.py | Parses RegShot output and extracts meaningful registry entries
@@ -72,7 +72,7 @@ Extensible & Scriptable — Modular structure for easy upgrades
 	visualizer.py | Draws graphs, pie charts, bar charts, and Sankey diagrams
 	regdropmap.py | Main controller to parse → analyze → visualize the data
 
- 📈 Outputs
+ ##📈 Outputs
 
   	flag_frequency.png — Frequency of detected flags
 
@@ -81,7 +81,7 @@ Extensible & Scriptable — Modular structure for easy upgrades
 	persistence_graph.png — Registry key ➔ Dropped file flow (Graph)
 
 	persistence_sankey.html — Interactive Sankey Diagram (HTML)
-📈 Future Scope
+##📈 Future Scope
 
 	🧹 Cleaner Graph Layouts — Make large graphs easier to read with better layouts, node grouping, and smarter spacing.
 
