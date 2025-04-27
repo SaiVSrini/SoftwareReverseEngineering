@@ -33,3 +33,23 @@ Visualizations — Generate clear and insightful:
 	🕸️ Network graphs of persistence links
 
 Extensible & Scriptable — Modular structure for easy upgrades
+
+🛠️ Installation
+Clone the repository:
+	git clone https://github.com/SaiVSrini/SoftwareReverseEngineering.git
+	cd SoftwareReverseEngineering/RegDropMap
+Install required Python libraries:
+	pip install -r requirements.txt
+
+
+📂 Project Structure
+	RegDropMap/
+	├── regdropmap.py       # Main script
+	├── utils/
+	│   ├── parser.py       # Parse RegShot diff.txt
+	│   ├── analyzer.py     # Flag suspicious persistence entries
+	│   ├── visualizer.py   # Generate visual outputs
+	├── requirements.txt    # Dependencies
+	├── output/             # Saved visualizations
+	└── README.md           # Project documentation
+
