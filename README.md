@@ -18,7 +18,9 @@ and to accomplish the following tasks:
 ⚡ Features
 
 Real-world log compatibility — Robust parsing of messy RegShot outputs
+
 Automatic Flagging — Highlights suspicious behaviors (e.g., Suspicious Folder, Incomplete Path)
+
 Visualizations — Generate clear and insightful:
 
 	📊 Flag frequency charts
