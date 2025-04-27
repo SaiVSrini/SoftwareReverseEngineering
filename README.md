@@ -92,3 +92,7 @@ Extensible & Scriptable — Modular structure for easy upgrades
 	🎯 Threat Intelligence Scoring — Automatically assign risk scores to registry entries based on known malware behaviors and heuristics.
 
 	🧩 Plugin System — Allow users to add custom detection rules or output formats via an easy plugin architecture.
+
+ ## Screenshots
+ 	![image](https://github.com/user-attachments/assets/264a2639-e9b4-4df2-a50d-35967457a158)
+
