@@ -23,6 +23,8 @@ Automatic Flagging — Highlights suspicious behaviors (e.g., Suspicious Folder,
 
 Visualizations — Generate clear and insightful:
 
+Extensible & Scriptable — Modular structure for easy upgrades
+
 	📊 Flag frequency charts
 	
 	🥧 Folder-based risk pie charts
@@ -31,7 +33,7 @@ Visualizations — Generate clear and insightful:
 	
 	🕸️ Network graphs of persistence links
 
-Extensible & Scriptable — Modular structure for easy upgrades
+
 
 ## 🛠️ Installation
 
