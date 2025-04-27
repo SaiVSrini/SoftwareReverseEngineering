@@ -63,5 +63,22 @@ Extensible & Scriptable — Modular structure for easy upgrades
 	-i / --input | Path to RegShot diff.txt file (required)
 	-o / --output | Output folder for generated graphs (optional, defaults to output/)
 	--verbose | Enable detailed console output (optional)
+ 
+🧩 Module Descriptions
 
+ 	Module | Purpose
+	parser.py | Parses RegShot output and extracts meaningful registry entries
+	analyzer.py | Flags suspicious entries based on folder paths, missing data, etc.
+	visualizer.py | Draws graphs, pie charts, bar charts, and Sankey diagrams
+	regdropmap.py | Main controller to parse → analyze → visualize the data
+
+ 📈 Outputs
+
+  	flag_frequency.png — Frequency of detected flags
+
+	suspicious_folder_pie.png — Dropped files: Suspicious vs Normal folders
+
+	persistence_graph.png — Registry key ➔ Dropped file flow (Graph)
+
+	persistence_sankey.html — Interactive Sankey Diagram (HTML)
 
