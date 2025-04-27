@@ -8,7 +8,9 @@ from utils.visualizer import (
     plot_flag_frequency,
     plot_suspicious_folder_pie,
     plot_persistence_graph,
-    plot_persistence_sankey
+    plot_persistence_sankey,
+    plot_persistence_hive,
+    plot_force_bipartite_graph 
 )
 
 def main():
@@ -33,6 +35,9 @@ def main():
     plot_suspicious_folder_pie(entries, args.output)
     plot_persistence_graph(entries, args.output)
     sankey_path = plot_persistence_sankey(entries, args.output)
+    plot_persistence_hive(entries, args.output)
+    plot_force_bipartite_graph(entries, args.output)
+
 
     # Automatically open the sankey HTML if it exists
     if sankey_path and os.path.exists(sankey_path):
@@ -40,6 +45,12 @@ def main():
         webbrowser.open(f"file://{os.path.abspath(sankey_path)}")
 
     print("[+] Done.")
+
+# after plotting Force Bipartite Graph
+    bipartite_path = plot_force_bipartite_graph(entries, args.output)
+    if bipartite_path:
+        print(f"[+] Opening Force-directed Bipartite Graph: {bipartite_path}")
+        webbrowser.open('file://' + os.path.realpath(bipartite_path))
 
 if __name__ == "__main__":
     main()

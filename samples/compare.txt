@@ -1,0 +1,26 @@
+----------------------------------
+Keys added:5
+----------------------------------
+HKCU\Software\Microsoft\Windows\CurrentVersion\Run\BadApp
+HKLM\Software\Classes\.badext
+HKLM\Software\Wow6432Node\BadPersistence
+HKCU\Software\FakeCompany\AppStart
+HKCU\Software\Microsoft\Windows\CurrentVersion\Run\GoodApp
+
+----------------------------------
+Values added:5
+----------------------------------
+HKCU\Software\Microsoft\Windows\CurrentVersion\Run\BadApp\Path: "C:\\Users\\User\\AppData\\Local\\Temp\\bad.exe"
+HKLM\Software\Classes\.badext\Handler: "C:\\Users\\User\\AppData\\Roaming\\evil.exe"
+HKLM\Software\Wow6432Node\BadPersistence\Startup: "C:\\ProgramData\\safeapp.exe"
+HKCU\Software\FakeCompany\AppStart\Main: "C:\\Program Files\\LegitApp\\app.exe"
+HKCU\Software\Microsoft\Windows\CurrentVersion\Run\GoodApp\Run: "C:\\Program Files\\GoodApp\\good.exe"
+
+----------------------------------
+Files added:5
+----------------------------------
+C:\\Users\\User\\AppData\\Local\\Temp\\bad.exe
+C:\\Users\\User\\AppData\\Roaming\\evil.exe
+C:\\ProgramData\\safeapp.exe
+C:\\Program Files\\LegitApp\\app.exe
+C:\\Program Files\\GoodApp\\good.exe

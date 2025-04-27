@@ -20,37 +20,60 @@ def plot_flag_frequency(entries, output_dir):
         print("[!] No flags found to plot.")
         return
 
-    plt.figure(figsize=(10, 6))
-    plt.bar(flag_counts.keys(), flag_counts.values(), color='skyblue')
+    plt.figure(figsize=(12, 7))
+
+    labels = list(flag_counts.keys())
+    counts = list(flag_counts.values())
+
+    # Create a unique color for each bar
+    colors = plt.cm.tab20.colors  # A colormap with many distinct colors
+    bar_colors = [colors[i % len(colors)] for i in range(len(labels))]
+
+    bars = plt.bar(labels, counts, color=bar_colors)
+
     plt.xticks(rotation=45, ha='right')
-    plt.title('Flag Frequency Across Registry Entries')
+    plt.title('Flag Frequency Across Registry Entries', fontsize=16)
+    plt.ylabel('Count', fontsize=14)
+    plt.xlabel('Flags', fontsize=14)
     plt.tight_layout()
+
     output_path = os.path.join(output_dir, 'flag_frequency.png')
     plt.savefig(output_path)
     plt.close()
-    print(f"[+] Saved flag frequency bar chart to {output_path}")
+    print(f"[+] Saved colorful flag frequency bar chart to {output_path}")
+
 
 def plot_suspicious_folder_pie(entries, output_dir):
     ensure_output_dir(output_dir)
-    suspicious = sum(1 for entry in entries if "Suspicious Folder" in entry.flags)
-    normal = len(entries) - suspicious
 
-    if suspicious + normal == 0:
-        print("[!] No entries to plot pie chart.")
+    suspicious = sum(1 for entry in entries if "Suspicious Folder" in (entry.flags or []))
+    normal = sum(1 for entry in entries if "Suspicious Folder" not in (entry.flags or []))
+
+    total = suspicious + normal
+    if total == 0:
+        print("[!] No entries found to plot pie chart.")
         return
 
     labels = ['Suspicious Folder', 'Normal Folder']
     sizes = [suspicious, normal]
     colors = ['red', 'green']
 
-    plt.figure(figsize=(6, 6))
-    plt.pie(sizes, labels=labels, colors=colors, autopct='%1.1f%%', startangle=140)
-    plt.axis('equal')
-    plt.title('Dropped Files in Suspicious vs Normal Folders')
+    plt.figure(figsize=(7, 7))
+    plt.pie(
+        sizes,
+        labels=labels,
+        colors=colors,
+        autopct='%1.1f%%',
+        startangle=140,
+        wedgeprops=dict(width=0.5)  # Makes a cleaner donut shape
+    )
+    plt.axis('equal')  # Equal aspect ratio ensures pie is drawn as a circle.
+    plt.title('Dropped Files in Suspicious vs Normal Folders', fontsize=14)
     output_path = os.path.join(output_dir, 'suspicious_folder_pie.png')
-    plt.savefig(output_path)
+    plt.savefig(output_path, dpi=300)
     plt.close()
     print(f"[+] Saved suspicious folder pie chart to {output_path}")
+
 
 def plot_persistence_graph(entries, output_dir):
     ensure_output_dir(output_dir)
@@ -145,5 +168,137 @@ def plot_persistence_sankey(entries, output_dir):
     output_path = os.path.join(output_dir, 'persistence_sankey.html')
     fig.write_html(output_path)
     print(f"[+] Saved interactive Sankey diagram to {output_path}")
+
+    return output_path
+
+def plot_persistence_hive(entries, output_dir):
+    """Generate a clean Hive Plot for registry persistence mapping."""
+    os.makedirs(output_dir, exist_ok=True)
+
+    G = nx.DiGraph()
+
+    registry_keys = []
+    dropped_files = []
+
+    for entry in entries:
+        if entry.file_path:
+            registry_keys.append(entry.reg_key)
+            dropped_files.append(entry.file_path)
+            G.add_edge(entry.reg_key, entry.file_path)
+
+    if not G.nodes:
+        print("[!] No nodes available to plot Hive diagram.")
+        return
+
+    # Assign positions: X=0 for registry keys, X=1 for dropped files
+    pos = {}
+    reg_y = 1.0
+    drop_y = 1.0
+
+    # Sort for consistent layout
+    registry_keys_sorted = sorted(set(registry_keys))
+    dropped_files_sorted = sorted(set(dropped_files))
+
+    spacing = 1.5 / max(len(registry_keys_sorted), 1)  # avoid division by zero
+    for reg in registry_keys_sorted:
+        pos[reg] = (0, reg_y)
+        reg_y -= spacing
+
+    spacing = 1.5 / max(len(dropped_files_sorted), 1)
+    for drop in dropped_files_sorted:
+        pos[drop] = (1, drop_y)
+        drop_y -= spacing
+
+    # Drawing
+    plt.figure(figsize=(20, 12))
+    plt.title('Persistence Registry Key ➔ Dropped File Map (Hive Plot)', fontsize=18)
+
+    # Draw registry nodes (left)
+    nx.draw_networkx_nodes(G, pos,
+                           nodelist=registry_keys_sorted,
+                           node_color='red',
+                           node_size=300,
+                           label='Registry Keys',
+                           alpha=0.8)
+
+    # Draw dropped file nodes (right)
+    nx.draw_networkx_nodes(G, pos,
+                           nodelist=dropped_files_sorted,
+                           node_color='skyblue',
+                           node_size=300,
+                           label='Dropped Files',
+                           alpha=0.8)
+
+    # Draw edges
+    nx.draw_networkx_edges(G, pos, edge_color='gray', arrows=False, width=1)
+
+    # Draw labels separately to avoid collision
+    for node, (x, y) in pos.items():
+        if x == 0:
+            plt.text(x - 0.02, y, node, horizontalalignment='right', verticalalignment='center', fontsize=7)
+        else:
+            plt.text(x + 0.02, y, node, horizontalalignment='left', verticalalignment='center', fontsize=7)
+
+    plt.axis('off')
+    plt.legend()
+    plt.tight_layout()
+
+    output_path = os.path.join(output_dir, 'persistence_hive.png')
+    plt.savefig(output_path, dpi=300)
+    plt.close()
+
+    print(f"[+] Saved Hive Plot persistence graph to {output_path}")
+def plot_force_bipartite_graph(entries, output_dir):
+    ensure_output_dir(output_dir)
+
+    registry_keys = []
+    dropped_files = []
+
+    for entry in entries:
+        if entry.file_path:
+            registry_keys.append(entry.reg_key)
+            dropped_files.append(entry.file_path)
+
+    if not registry_keys or not dropped_files:
+        print("[!] No data to plot force bipartite graph.")
+        return None
+
+    unique_registry = list(set(registry_keys))
+    unique_files = list(set(dropped_files))
+
+    nodes = unique_registry + unique_files
+    sources = [nodes.index(r) for r in registry_keys]
+    targets = [nodes.index(f) for f in dropped_files]
+
+    colors = ['red' if node in unique_registry else 'skyblue' for node in nodes]
+
+    fig = go.Figure(data=[
+        go.Sankey(
+            arrangement='snap',
+            node=dict(
+                pad=15,
+                thickness=20,
+                line=dict(color="black", width=0.5),
+                label=nodes,
+                color=colors,
+            ),
+            link=dict(
+                source=sources,
+                target=targets,
+                value=[1] * len(sources),
+                color=["gray"] * len(sources),
+            )
+        )
+    ])
+
+    fig.update_layout(
+        title_text="Force-directed Bipartite Graph: Registry Keys \u279e Dropped Files",
+        font_size=10,
+        height=900,
+    )
+
+    output_path = os.path.join(output_dir, 'persistence_force_bipartite.html')
+    fig.write_html(output_path)
+    print(f"[+] Saved interactive Force-directed Bipartite Graph to {output_path}")
 
     return output_path
