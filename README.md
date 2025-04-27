@@ -57,7 +57,7 @@ Extensible & Scriptable — Modular structure for easy upgrades
  ## 🚀 Usage
 
  	Run the tool:
-  	python regdropmap.py -i path/to/diff.txt -o output_folder --verbose
+  	python regdropmap.py -i path/to/compare.txt -o output_folder --verbose
    
    	Argument | Description
 	-i / --input | Path to RegShot diff.txt file (required)
@@ -66,9 +66,9 @@ Extensible & Scriptable — Modular structure for easy upgrades
  
 ## 🧩 Module Descriptions
 
- 	Module | Purpose
-	parser.py | Parses RegShot output and extracts meaningful registry entries
-	analyzer.py | Flags suspicious entries based on folder paths, missing data, etc.
+ 	    Module    | Purpose   |
+	parser.py     | Parses RegShot output and extracts meaningful registry entries
+	analyzer.py   | Flags suspicious entries based on folder paths, missing data, etc.
 	visualizer.py | Draws graphs, pie charts, bar charts, and Sankey diagrams
 	regdropmap.py | Main controller to parse → analyze → visualize the data
 
@@ -81,6 +81,7 @@ Extensible & Scriptable — Modular structure for easy upgrades
 	persistence_graph.png — Registry key ➔ Dropped file flow (Graph)
 
 	persistence_sankey.html — Interactive Sankey Diagram (HTML)
+
 ## 📈 Future Scope
 
 	🧹 Cleaner Graph Layouts — Make large graphs easier to read with better layouts, node grouping, and smarter spacing.
