@@ -4,13 +4,11 @@
 RegDropMap is a lightweight forensic tool that parses RegShot diff files, identifies registry-based persistence mechanisms, and visualizes dropped file paths linked to registry keys.
 
 	It is designed to help:
-	
 	🕵️ Forensic analysts
-	
 	🛡️ Malware researchers
-	
 	🔒 Security professionals
-accomplish the following:
+ 
+and to accomplish the following tasks:
 
 	✅ Detect suspicious persistence techniques
 	✅ Map malware’s registry-to-file behaviors
@@ -18,10 +16,9 @@ accomplish the following:
 	✅ Automate tedious manual analysis of large diff.txt registry files
 
 ⚡ Features
+
 Real-world log compatibility — Robust parsing of messy RegShot outputs
-
 Automatic Flagging — Highlights suspicious behaviors (e.g., Suspicious Folder, Incomplete Path)
-
 Visualizations — Generate clear and insightful:
 
 	📊 Flag frequency charts
@@ -35,11 +32,12 @@ Visualizations — Generate clear and insightful:
 Extensible & Scriptable — Modular structure for easy upgrades
 
 🛠️ Installation
-Clone the repository:
-	git clone https://github.com/SaiVSrini/SoftwareReverseEngineering.git
-	cd SoftwareReverseEngineering/RegDropMap
-Install required Python libraries:
-	pip install -r requirements.txt
+
+	Clone the repository:
+		git clone https://github.com/SaiVSrini/SoftwareReverseEngineering.git
+		cd SoftwareReverseEngineering/RegDropMap
+	Install required Python libraries:
+		pip install -r requirements.txt
 
 
 📂 Project Structure
@@ -53,4 +51,15 @@ Install required Python libraries:
 	├── requirements.txt    # Dependencies
 	├── output/             # Saved visualizations
 	└── README.md           # Project documentation
+
+ 🚀 Usage
+
+ 	Run the tool:
+  	python regdropmap.py -i path/to/diff.txt -o output_folder --verbose
+   
+   	Argument | Description
+	-i / --input | Path to RegShot diff.txt file (required)
+	-o / --output | Output folder for generated graphs (optional, defaults to output/)
+	--verbose | Enable detailed console output (optional)
+
 
