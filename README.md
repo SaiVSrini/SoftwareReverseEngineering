@@ -81,4 +81,14 @@ Extensible & Scriptable — Modular structure for easy upgrades
 	persistence_graph.png — Registry key ➔ Dropped file flow (Graph)
 
 	persistence_sankey.html — Interactive Sankey Diagram (HTML)
+📈 Future Scope
 
+	🧹 Cleaner Graph Layouts — Make large graphs easier to read with better layouts, node grouping, and smarter spacing.
+
+  	🧠 AI-Powered Analysis — Use machine learning to automatically flag suspicious registry patterns and prioritize critical changes.
+
+   	🌐 Web Dashboard Integration — Create a fully interactive web app version with dynamic graph exploration and reporting.
+
+    	🎯 Threat Intelligence Scoring — Automatically assign risk scores to registry entries based on known malware behaviors and heuristics.
+
+     	🧩 Plugin System — Allow users to add custom detection rules or output formats via an easy plugin architecture.
