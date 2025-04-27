@@ -93,6 +93,9 @@ Extensible & Scriptable — Modular structure for easy upgrades
 
 	🧩 Plugin System — Allow users to add custom detection rules or output formats via an easy plugin architecture.
 
- ## Screenshots
- 	![image](https://github.com/user-attachments/assets/264a2639-e9b4-4df2-a50d-35967457a158)
+ ## Visualizations
+ ### Flag Frequency Chart
+
+  	![Flag Frequency](screenshots/flags.png)
+ 	
 
