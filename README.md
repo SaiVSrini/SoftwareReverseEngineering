@@ -100,6 +100,31 @@ Extensible & Scriptable — Modular structure for easy upgrades
 
  ### Flag Frequency Chart
 
-  	Shows how often each suspicious behavior was flagged across registry entries.
+Shows how often each suspicious behavior was flagged across registry entries.
  	
-    ![Flag_Frequency](Visualizations/Flag_Frequency.png)
+![Flag_Frequency](Visualizations/Flag_Frequency.png)
+
+### Suspicious v/s Normal Folders Pie Chart
+
+Visualizes what percentage of dropped files went into suspicious folders vs safe folders.
+
+![Suspicious Folders](Visualizations/SuspiciousFolders.png)
+
+### Persistence Registry Graph
+
+Displays registry keys connected to dropped files using a spring network graph layout.
+
+![Persistence Graph](Visualizations/PersistenceGraph.png)
+
+### Persistence Hive Plot
+
+Organizes registry keys and dropped files into separate axes using a hive layout.
+
+![Persistence Hive](Visualizations/Persistence_Hive.png)
+
+
+### Interactive Bipartite Force Graph
+
+Fully interactive visualization where registry keys and files are two distinct groups.
+
+> 🔗 *This one is an HTML file*: [Click to Open Interactive Bipartite Graph](output/persistence_force_bipartite.html)

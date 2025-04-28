@@ -44,35 +44,50 @@ def plot_flag_frequency(entries, output_dir):
 
 
 def plot_suspicious_folder_pie(entries, output_dir):
+    import os
+    import matplotlib.pyplot as plt
+
+    def ensure_output_dir(output_dir):
+        os.makedirs(output_dir, exist_ok=True)
+
     ensure_output_dir(output_dir)
 
-    suspicious = sum(1 for entry in entries if "Suspicious Folder" in (entry.flags or []))
-    normal = sum(1 for entry in entries if "Suspicious Folder" not in (entry.flags or []))
+    suspicious = sum(1 for entry in entries if "Suspicious Folder" in entry.flags)
+    normal = len(entries) - suspicious
 
-    total = suspicious + normal
-    if total == 0:
-        print("[!] No entries found to plot pie chart.")
+    if suspicious + normal == 0:
+        print("[!] No entries to plot pie chart.")
         return
 
     labels = ['Suspicious Folder', 'Normal Folder']
     sizes = [suspicious, normal]
     colors = ['red', 'green']
 
-    plt.figure(figsize=(7, 7))
-    plt.pie(
+    fig, ax = plt.subplots(figsize=(7, 7))
+
+    wedges, texts, autotexts = ax.pie(
         sizes,
         labels=labels,
-        colors=colors,
         autopct='%1.1f%%',
         startangle=140,
-        wedgeprops=dict(width=0.5)  # Makes a cleaner donut shape
+        colors=colors,
+        textprops={'fontsize': 12},
+        pctdistance=0.75,
     )
-    plt.axis('equal')  # Equal aspect ratio ensures pie is drawn as a circle.
+
+    # Make it a donut chart (optional but looks cleaner)
+    centre_circle = plt.Circle((0, 0), 0.50, fc='white')
+    fig.gca().add_artist(centre_circle)
+
+    ax.axis('equal')  # Equal aspect ratio ensures the pie is a circle
     plt.title('Dropped Files in Suspicious vs Normal Folders', fontsize=14)
+
     output_path = os.path.join(output_dir, 'suspicious_folder_pie.png')
-    plt.savefig(output_path, dpi=300)
+    plt.tight_layout()
+    plt.savefig(output_path)
     plt.close()
     print(f"[+] Saved suspicious folder pie chart to {output_path}")
+
 
 
 def plot_persistence_graph(entries, output_dir):
