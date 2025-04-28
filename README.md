@@ -97,8 +97,9 @@ Extensible & Scriptable — Modular structure for easy upgrades
 	🧩 Plugin System — Allow users to add custom detection rules or output formats via an easy plugin architecture.
 
  ## Visualizations
+
  ### Flag Frequency Chart
 
-  	![image](screenshots/flags.png)
+  	Shows how often each suspicious behavior was flagged across registry entries.
  	
-
+    ![Flag_Frequency](Visualizations/Flag_Frequency.png)
